@@ -10,6 +10,7 @@ import akka.io.Tcp.Register
 import akka.io.Tcp.Connect
 import akka.io.Tcp.CommandFailed
 import akka.io.Tcp.Received
+import redis.config.RedisConfig._
 
 abstract class RedisWorkerIO(val address: InetSocketAddress) extends Actor with ActorLogging {
 
@@ -170,7 +171,7 @@ abstract class RedisWorkerIO(val address: InetSocketAddress) extends Actor with 
 
   import scala.concurrent.duration.{DurationInt, FiniteDuration}
 
-  def reconnectDuration: FiniteDuration = 2 seconds
+  def reconnectDuration: FiniteDuration = RedisReconnectTimeout
 
   private def writeWorker(byteString: ByteString) {
     onWriteSent()
