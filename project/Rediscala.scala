@@ -17,10 +17,13 @@ object Resolvers {
 
 object Dependencies {
   val akkaVersion = "2.2.1"
+  val configVersion = "1.2.0"
 
   import sbt._
 
   val akkaActor = "com.typesafe.akka" %% "akka-actor" % akkaVersion
+
+  val config = "com.typesafe" % "config" % configVersion
 
   val akkaTestkit = "com.typesafe.akka" %% "akka-testkit" % akkaVersion
 
@@ -33,6 +36,7 @@ object Dependencies {
 
   val rediscalaDependencies = Seq(
     akkaActor,
+    config,
     akkaTestkit % "test",
     scalameter % "test",
     specs2 % "test",
@@ -43,7 +47,7 @@ object Dependencies {
 object RediscalaBuild extends Build {
   val baseSourceUrl = "https://github.com/etaty/rediscala/tree/"
 
-  val v = "1.3"
+  val v = "1.3.001"
 
   lazy val standardSettings = Defaults.defaultSettings ++
     Seq(
