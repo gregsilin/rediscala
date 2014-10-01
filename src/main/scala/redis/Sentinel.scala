@@ -5,6 +5,7 @@ import akka.actor.{Props, ActorRef, ActorSystem}
 import akka.event.Logging
 import redis.api.pubsub.{PMessage, Message}
 import redis.actors.RedisSubscriberActorWithCallback
+import redis.config.RedisConfig
 import java.net.InetSocketAddress
 import scala.concurrent.{Await, Future}
 
@@ -136,7 +137,7 @@ abstract class SentinelMonitored(system: ActorSystem) {
       case _ => throw new Exception(s"No such master '$master'")
     }
 
-    Await.result(ff, 15 seconds)
+    Await.result(ff, RedisConfig.RedisConnectionTimeout)
   }
 }
 
